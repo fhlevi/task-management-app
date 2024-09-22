@@ -1,15 +1,15 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import addOnboardingStack from './shared/Onboarding';
+import addTaskStack from './shared/Task';
 
 const Stack = createStackNavigator();
 
-const OnboardingStack = () => {
+const TaskStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      {addOnboardingStack(Stack)}
+      {addTaskStack(Stack)}
     </Stack.Navigator>
   );
 };
 
-export default OnboardingStack;
+export default TaskStack;

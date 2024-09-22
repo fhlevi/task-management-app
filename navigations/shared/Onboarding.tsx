@@ -1,14 +1,14 @@
+import OnboardingScreen from 'screens/OnboardingScreen';
 import React from 'react';
-import WelcomeScreen from 'screens/WelcomeScreen';
 
-interface IAuth {
-  Screen: any;
+type PropsOnboarding = {
+  Screen: any
 }
 
-export default function addOnboardingStack(Stack: IAuth) {
+export default function addOnboardingStack(Stack: PropsOnboarding) {
   return (
     <>
-      <Stack.Screen name="Onboarding" component={WelcomeScreen} />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
     </>
   );
 }

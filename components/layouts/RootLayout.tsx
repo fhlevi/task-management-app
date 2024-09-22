@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {SafeAreaView} from 'react-native';
-import StatusBar from '../commons/StatusBar';
 
 type Props = {
   children?: ReactNode;
@@ -10,10 +8,7 @@ type Props = {
 const RootLayout = (props: Props) => {
   return (
     <>
-      <StatusBar />
-      <SafeAreaView style={{flex: 1}}>
-        <SafeAreaProvider>{props.children}</SafeAreaProvider>
-      </SafeAreaView>
+      <SafeAreaProvider>{props.children}</SafeAreaProvider>
     </>
   );
 };

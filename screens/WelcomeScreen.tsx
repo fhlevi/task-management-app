@@ -1,95 +1,109 @@
+
+import useWelcoming from 'store/welcoming';
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import StatusBar from '@/components/commons/StatusBar';
+import {View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, SafeAreaView} from 'react-native';
+
+const {width} = Dimensions.get('window');
 
 const WelcomeScreen = ({navigation}: any) => {
-  //   const handleNextStep = () => {
-  //     navigation.navigate('AuthStack', {screen: 'Login'});
-  //   };
+  const setInitialized: any = useWelcoming((state) => state.setInitialized);
+  const handleNextStep = () => {
+    setInitialized(true)
+    navigation.navigate('OnboardingStack', { screen: 'Onboarding' })
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <View style={styles.content}>
-          <Image
-            style={styles.logo}
-            source={require('@src/assets/images/logo-onboarding.png')}
-          />
-          <View style={styles.wrapTitleDesc}>
-            <Text style={styles.title}>TaskZen</Text>
-            <Text style={styles.shortDesc}>
-                Streamlined task management with
-            </Text>
-            <Text style={styles.shortDesc}>intuitive design</Text>
-          </View>
-        </View>
-        <View style={styles.footer}>
-            <View style={{ flex: 1 }}>
-                <Text style={styles.labelFooter}>Show</Text>
-                <Text style={styles.labelFooter}>Case</Text>
-            </View>
-            <TouchableOpacity style={styles.buttonNext}>
-                <Image 
-                    source={require('src/assets/icons/arrow-right.png')} 
-                />
-            </TouchableOpacity>
-        </View>
+    <SafeAreaView style={[styles.container, styles.shadow]}>
+      <StatusBar backgroundColor="#5e2ef8" barStyle="light-content" />
+
+      <View style={styles.containerImage3Icon}>
+        <Image 
+          style={[styles.image3Icon]} 
+          resizeMode="cover" 
+          source={require('@src/assets/images/logo-onboarding.png')} 
+        />
       </View>
-    </View>
+      <Text style={[styles.taskzen, styles.taskzenFlexBox]}>
+        TaskZen
+      </Text>
+      <Text style={styles.streamlinedTaskManagement}>
+        Streamlined task management with intuitive design
+      </Text>
+
+      <View style={styles.footerFlexBox}>
+        <Text style={[styles.showCase, styles.taskzenFlexBox]}>
+          Show Case
+        </Text>
+        <TouchableOpacity style={styles.buttonNext} onPress={handleNextStep}>
+          <Image  source={require('src/assets/icons/arrow-right.png')} />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0)",
+    shadowOffset: {
+      width: 0,
+      height: 149
+    },
+    shadowRadius: 42,
+    elevation: 42,
+    shadowOpacity: 1,
+  },
   container: {
-    paddingHorizontal: 28,
-    paddingTop: 17,
-    backgroundColor: '#5E2EF8',
-    height: '100%',
-    width: '100%',
+    backgroundColor: "#5e2ef8",
+    flex: 1,
+    overflow: "hidden",
+    alignItems: 'center'
   },
-  main: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  content: {
-    alignItems: 'center',
-    position: 'relative'
-  },
-  logo: {
-    marginRight: 40,
-  },
-  wrapTitleDesc: {
-    position: 'absolute',
-    bottom: -50,
-  },
-  title: {
-    fontSize: 42,
-    top: 0,
-    color: '#ffffff',
-    textAlign: 'center',
-    fontFamily: 'Poppins'
-  },
-  shortDesc: {
+  streamlinedTaskManagement: {
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
+    width: 282,
+    color: "#fff",
+    fontFamily: "Poppins-Regular",
     lineHeight: 27,
-    color: '#ffffff',
-    fontFamily: 'Poppins'
   },
-  labelFooter: {
-    color: '#ffffff',
-    fontWeight: '900',
-    lineHeight: 27,
-    fontSize: 24
+  containerImage3Icon: {
+    width: width,
+    paddingLeft: 30,
+    justifyContent: 'flex-end',
+    height: 372,
   },
-  footer: {
-    width: '100%',
-    paddingBottom: 20,
+  image3Icon: {
+    width: 289,
+    height: 282,
+    alignItems: 'center'
+  },
+  taskzen: {
+    fontSize: 42,
+    width: 173,
+    height: 64,
+    fontFamily: "Poppins-Regular",
+    textAlign: "center"
+  },
+  taskzenFlexBox: {
+    color: "#fff",
+  },
+  showCase: {
+    width: 100,
+    fontSize: 24,
+    fontWeight: "900",
+    fontFamily: "Poppins-Black",
+    textAlign: "left",
+    lineHeight: 27
+  },
+  footerFlexBox: { 
+    flex: 1, 
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    width: width,
+    paddingHorizontal: 27
   },
   buttonNext: {
     width: 66,
